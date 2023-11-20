@@ -11,7 +11,8 @@ export default class ProductManager {
         if(fs.existsSync(this.path)){
             const data = await fs.promises.readFile(this.path, 'utf-8');
             const products = JSON.parse(data);
-            return products
+            this.products = products;
+            return this.products
         }else{
             return []
         }
@@ -53,8 +54,8 @@ export default class ProductManager {
 
         this.products.push(product);
 
-        await fs.promises.writeFile(this.path, JSON.stringify(products,null,'\t'))
-        return products;
+        await fs.promises.writeFile(this.path, JSON.stringify(this.products,null,'\t'))
+        return `Product ${title} added correctly`;
 
     }
 
@@ -70,16 +71,27 @@ export default class ProductManager {
     }
 
     updateProduct = async (productId, newData) => {
-        const products = await this.getProducts();
-        products = products.map(prod => prod.id === productId ? {...prod, ...newData} : prod);
-        await fs.promises.writeFile(this.path, JSON.stringify(products,null,'\t'))
-        return products;
+        this.products = await this.getProducts();
+        let product = await this.getProductById(productId);
+        if(product !== "Not found"){
+            this.products = this.products.map(prod => prod.id === productId ? {...prod, ...newData} : prod);
+            await fs.promises.writeFile(this.path, JSON.stringify(this.products,null,'\t'))
+            const product = this.products.find (product => product.id == productId);
+            return `Product ${product.title} updated correctly`;
+        }else{
+            return `Product not found`
+        }
     }
 
     deleteProduct = async (productId) => {
-        const products = await this.getProducts();
-        products = products.filter(prod => prod.id !== productId);
-        await fs.promises.writeFile(this.path, JSON.stringify(products,null,'\t'))
-        return products;
+        let products = await this.getProducts();
+        let product = await this.getProductById(productId);       
+        if(product !== "Not found"){
+            products = products.filter(prod => prod.id !== productId);
+            await fs.promises.writeFile(this.path, JSON.stringify(products,null,'\t'))
+            return `Product deleted correctly`;
+        }else{
+            return `Product not found`
+        }
     }
 }
