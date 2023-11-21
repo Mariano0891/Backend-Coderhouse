@@ -1,0 +1,65 @@
+[
+	{
+		"title": "Filtro",
+		"description": "Filtro de combustible",
+		"price": 300,
+		"thumbnail": "aaaaaaaaaaa",
+		"code": "BG5X9155AA",
+		"stock": 10,
+		"id": 1
+	},
+	{
+		"title": "Filtro primario",
+		"description": "Filtro de aire",
+		"price": 400,
+		"thumbnail": "aaaaaaaaaaa",
+		"code": "RFA40",
+		"stock": 10,
+		"id": 2
+	},
+	{
+		"title": "Filtro secundario",
+		"description": "Filtro de aire",
+		"price": 800,
+		"thumbnail": "bbbbbbbb",
+		"code": "RFA46",
+		"stock": 12,
+		"id": 3
+	},
+	{
+		"title": "Filtro gasoil",
+		"description": "Filtro de trampa de agua",
+		"price": 1200,
+		"thumbnail": "ddddddddd",
+		"code": "BH4X9N074AA",
+		"stock": 24,
+		"id": 4
+	},
+	{
+		"title": "Filtro aceite",
+		"description": "Filtro de aceite motor",
+		"price": 700,
+		"thumbnail": "eeeeeeeee",
+		"code": "BG5X6731AA",
+		"stock": 12,
+		"id": 5
+	},
+	{
+		"title": "Filtro aceite",
+		"description": "Filtro de aceite motor",
+		"price": 1800,
+		"thumbnail": "ffffffffffffff",
+		"code": "BG2X6731CA",
+		"stock": 20,
+		"id": 6
+	},
+	{
+		"title": "Filtro urea",
+		"description": "Filtro del circuito de urea",
+		"price": 500,
+		"thumbnail": "gggggggggggggggg",
+		"code": "BH0X1055AA",
+		"stock": 12,
+		"id": 7
+	}
+]
