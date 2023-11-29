@@ -1,0 +1,68 @@
+[
+	{
+		"id": 2,
+		"title": "Filtro",
+		"description": "Filtro de combustible",
+		"code": "BG6X9155AA",
+		"price": 2500,
+		"status": "true",
+		"stock": 60,
+		"category": "Filtracion",
+		"thumbnail": []
+	},
+	{
+		"id": 3,
+		"title": "Filtro",
+		"description": "Filtro de combustible",
+		"code": "BG7X9155AA",
+		"price": 300,
+		"status": "true",
+		"stock": 10,
+		"category": "Filtracion",
+		"thumbnail": []
+	},
+	{
+		"id": 4,
+		"title": "Filtro",
+		"description": "Filtro de combustible",
+		"code": "BG8X9155AA",
+		"price": 300,
+		"status": "true",
+		"stock": 10,
+		"category": "Filtracion",
+		"thumbnail": []
+	},
+	{
+		"id": 5,
+		"title": "Filtro",
+		"description": "Filtro de combustible",
+		"code": "BG9X9155AA",
+		"price": 300,
+		"status": "true",
+		"stock": 10,
+		"category": "Filtracion",
+		"thumbnail": []
+	},
+	{
+		"id": 6,
+		"title": "Filtro",
+		"description": "Filtro de combustible",
+		"code": "BG3X9155AA",
+		"price": 300,
+		"status": "true",
+		"stock": 10,
+		"category": "Filtracion",
+		"thumbnail": []
+	},
+	{
+		"id": 7,
+		"title": "Filtro",
+		"description": "Filtro de combustible",
+		"code": "BG2X9155AA",
+		"price": 300,
+		"status": "true",
+		"stock": 10,
+		"category": "Filtracion",
+		"thumbnail": []
+	}
+]
