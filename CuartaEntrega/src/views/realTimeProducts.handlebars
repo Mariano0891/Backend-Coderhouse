@@ -2,9 +2,9 @@
 
 <div>
     <h2>Add new product</h2>
-    <form action="post" id="addProductForm">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" required/>
+    <form method="post" id="addProductForm">
+        <label for="title">Name</label>
+        <input type="text" name="title" id="title" required/>
 
         <label for="description">Description</label>
         <input type="text" name="description" id="description" required/>
@@ -13,15 +13,15 @@
         <input type="text" name="code" id="code" required/>
 
         <label for="price">Price</label>
-        <input type="text" name="price" id="price" required/>
+        <input type="number" name="price" id="price" required/>
 
         <label for="stock">stock</label>
-        <input type="text" name="stock" id="stock" required/>
+        <input type="number" name="stock" id="stock" required/>
 
         <label for="category">Category</label>
         <input type="text" name="category" id="category" required/>
 
-        <button type="submit">Add product</button>
+        <button type="submit" id="submit">Add product</button>
     </form>
 </div>
 <div>

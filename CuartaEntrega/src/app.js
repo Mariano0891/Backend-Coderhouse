@@ -5,6 +5,7 @@ import {viewsRouter} from './routes/views.routes.js';
 import {Server} from 'socket.io';
 import { cartRouter } from "./routes/carts.routes.js";
 import { productRouter } from "./routes/products.routes.js";
+import ProductManager from './managers/ProductManager.js';
 
 const PORT = 8080;
 
@@ -15,7 +16,7 @@ app.use(express.urlencoded({extended:true}));
 
 const httpServer = app.listen(PORT, ()=> console.log(`Server is running on port ${PORT}`));
 
-const socketServer = new Server(httpServer);
+const io = new Server(httpServer);
 
 app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
@@ -27,3 +28,14 @@ app.use('/', viewsRouter);
 app.use("/realTimeProducts", viewsRouter);
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
+
+io.on('connection',socket=>{
+    console.log("Nuevo cliente conectado");
+    socket.on('addProduct', async (productData)=>{
+        console.log(productData);
+        const productManager = new ProductManager('products.json')
+        await productManager.addProduct(productData);
+        //let products = await productManager.getProducts();
+        io.emit('newProduct', productData)
+    })
+})

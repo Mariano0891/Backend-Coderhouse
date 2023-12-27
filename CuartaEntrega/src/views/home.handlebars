@@ -1,8 +1,16 @@
 <h1>Product list</h1>
 <ul>
     {{#each products}}
-        <li>Name: {{this.title}}, Description: {{this.description}}, Code: {{this.code}}, Price: {{this.price}}, Stock: {{this.stock}}, Category: {{this.category}}</li>
+        <li>
+            <h2>Name: {{this.title}}</h2>
+            <p>Description: {{this.description}}</p>
+            <p>Code: {{this.code}}</p>
+            <p>Price: {{this.price}}</p>
+            <p>Stock: {{this.stock}}</p>
+            <p>Category: {{this.category}}</p>
+        </li>
     {{/each}}
 </ul>
 
 <script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
