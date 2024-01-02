@@ -22,7 +22,7 @@ export default class ProductManagerDB {
 
     getProductById = async (pid) => {
         
-        const product = await productsModel.findOne({_id_id});
+        const product = await productsModel.findOne({_id:pid});
         return {
             status : "success",
             msg: product

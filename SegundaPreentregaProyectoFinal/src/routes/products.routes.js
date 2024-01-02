@@ -5,13 +5,34 @@ const router = Router();
 const productManagerDB = new ProductManagerDB();
 
 router.get('/', async (req, res)=>{
+    try{
+
+        const {limit, page, sort, category, price} = req.query
+        const options = {
+            limit: limit ?? 10,
+            page: page ?? 1,
+            sort: {price: sort === "asc" ? 1 : -1},
+            lean: true,
+        }
+        const products = await productManagerDB.getProducts()
+        
+        if(products.hasPrevPage){
+            products.prevLink = "---LINK---"
+        }
+        if(products.hasNextPage){
+            products.nextLink = "---LINK---"
+        }
+
+        res.status(200).send({
+            status: "success",
+            msg: products
+        })
+        
+    }catch (error) {
+        console.log(error);
+    }
+
     //let limit = parseInt(req.query.limit);
-    const products = await productManagerDB.getProducts()
-    
-    res.status(200).send({
-        status: "success",
-        msg: products
-    })
     /*if(!limit || limit <= 0){
         res.status(200).send({
             status:"succcess",

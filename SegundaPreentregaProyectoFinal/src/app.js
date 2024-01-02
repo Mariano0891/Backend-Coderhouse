@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.listen(PORT, ()=>{
+const httpServer = app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);
 })
 
