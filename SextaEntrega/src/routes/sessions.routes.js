@@ -20,10 +20,10 @@ router.post("/register", async (req,res)=>{
         mail,
         age,
         password,
-        adminStatus : false
+        profile : 'User'
     }
     let result = await userModel.create(user);
-    res.send({
+    res.status(200).send({
         status:"success",
         message: "user registered"
     })
@@ -43,14 +43,26 @@ router.post("/login", async (req,res)=>{
         name: user.name,
         lastName: user.lastName,
         mail: user.mail,
-        age: user.age
+        age: user.age,
+        profile: user.profile
     }
     
-    res.send({
+    res.status(200).send({
         status:"sucess",
         payload: req.session.user,
         message: "Successful login",
     })
 })
 
+router.get('/logout', (req,res)=>{
+    req.session.destroy(err=>{
+        if(err){
+            return res.status(500).send({
+                status: 'error',
+                message:'Error in log out.'
+            })
+        }
+        res.redirect('/login')
+    })
+})
 export default router;
