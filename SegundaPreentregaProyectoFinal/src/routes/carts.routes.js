@@ -5,17 +5,21 @@ const router = Router();
 const cartManagerMongo = new CartManagerDB();
 
 router.get('/', async (req, res)=>{
+    try{
     const carts = await cartManagerMongo.getCarts()
     res.status(200).send({
         status:"success",
         carts: carts
     })
+    }catch(error){
+        console.log(error)
+    }
 })
 
 router.get('/:cid', async (req, res)=>{
     const cid = req.params.cid;
-    const response = await cartManager.getCartById(cid);
-    if(response !== `Not found`){
+    const response = await cartManagerMongo.getCartById(cid);
+    if(response == cart){
         res.status(200).send({
             status:"success",
             product: response
@@ -28,11 +32,14 @@ router.get('/:cid', async (req, res)=>{
 })
 
 router.post('/', async (req, res)=>{
-    const cart = await cartManagerMongo.addCart();
+    try{const cart = await cartManagerMongo.addCart();
     res.status(200).send({
         status:"success",
         message: cart
     })
+    }catch(error){
+        console.log(error)
+    }
 })
 
 router.post('/:cid/product/:pid', async (req, res)=>{
@@ -41,12 +48,17 @@ router.post('/:cid/product/:pid', async (req, res)=>{
     const pid = parseInt(req.params.pid);
     const quantity = parseInt(req.body.quantity);
 
-    const cart = await cartManagerMongo.addProductsToCart(cid, pid, quantity);
+    try {
+        const cart = await cartManagerMongo.addProductsToCart(cid, pid, quantity);
 
-    res.status(200).send({
-        status: "sucess",
-        msg: cart
-    });
+        res.status(200).send({
+            status: "sucess",
+            msg: cart
+        });
+    } catch (error){
+        console.log(error)
+    }
+
     /*const response = await cartManager.addProductsToCart(cid, pid)
     if(response == 'Cart not found'){
         res.status(400).send({
