@@ -5,31 +5,6 @@ import passport from "passport";
 
 const router = Router();
 
-/*router.post("/register", async (req,res)=>{
-    const { name, lastName, mail, age, password } = req.body;
-
-    const exists = await userModel.findOne({mail});
-    if(exists){
-        return res.status(409)
-        .send({
-            status:"error",
-            message: "User already registered"
-        })
-    }
-    const user = {
-        name,
-        lastName,
-        mail,
-        age,
-        password: createHash(password),
-        profile : 'User'
-    }
-    let result = await userModel.create(user);
-    res.status(200).send({
-        status:"success",
-        message: "user registered"
-    })
-})*/
 router.post("/register", passport.authenticate("register", {failureRedirect:"/api/sessions/failregister"}),
 async (req,res) => {
     res.status(200).send({
@@ -46,40 +21,7 @@ router.get("/failregister", async (req,res)=>{
 })
 )
 
-/*router.post("/login", async (req,res)=>{
-    const {mail, password} = req.body;
-    const user = await userModel.findOne({mail});  
-
-    if(!user){
-        return res.status(401).send({
-            status:"error",
-            message: "Invalid email or password"
-        })
-    }
-    const isValidPassword = validatePassword(password, user);
-
-    if(!isValidPassword){
-        return res.status(401).send({
-            status:"error",
-            message: "Invalid email or password"
-        })
-    }
-
-    req.session.user ={
-        name: user.name,
-        lastName: user.lastName,
-        mail: user.mail,
-        age: user.age,
-        profile: user.profile
-    }
-    
-    res.status(200).send({
-        status:"sucess",
-        payload: req.session.user,
-        message: "Successful login",
-    })
-})*/
-router.post("/login", passport.authenticate("login", {failureRedirect:"/api/session/faillogin"}),
+router.post("/login", passport.authenticate("login", {failureRedirect:"/api/sessions/faillogin"}),
 async (req,res) => {
     if(!req.user){
         return res.status(401).send({
@@ -107,6 +49,13 @@ router.get("/faillogin", (req,res)=>{
         status:"error",
         message: "Login failed"
     })
+})
+
+router.get('/github', passport.authenticate("github", {scope:['user:mail']}), async (req,res)=>{});
+
+router.get('/githubcallback', passport.authenticate("github", {failureRedirect:'/login'}), async (req,res)=>{
+    req.session.user = req.user;
+    res.redirect('/')
 })
 
 router.get('/logout', (req,res)=>{
